@@ -33,9 +33,43 @@ This repository includes external repositories as Git submodules, so, unless you
 git submodule update --init --recursive
 ```
 
-### Create a Conda Environment
+### Install with uv (Recommended)
 
-To run GTSfM, first, we need to create a conda environment with the required dependencies.
+[Install uv](https://docs.astral.sh/uv/getting-started/installation/) if needed, then:
+
+On **Linux**, with CUDA support (GPU), run:
+```bash
+uv sync --extra dev --extra gpu
+```
+
+Check your cuda version then install `torch_scatter` from pre-built wheels. For example, for CUDA 12.1 → use cu121:
+```bash
+uv pip install torch-scatter -f https://data.pyg.org/whl/torch-2.5.1+cu121.html
+```
+
+On **Linux**, for CPU-only (no GPU), run:
+```bash
+uv sync --extra dev --extra cpu
+```
+
+On **macOS**, there is no CUDA support, so run:
+```bash
+uv sync --extra dev --extra cpu
+```
+
+### Install `gtsfm` as a module
+
+Now, install `gtsfm` as a module:
+
+```bash
+uv pip install -e .
+```
+
+Make sure that you can run `uv run python -c "import gtsfm; import gtsam; print('hello world')"` in python, and you are good to go!
+
+### Alternative: Create a Conda Environment (Legacy)
+
+If you prefer using Conda, you can still use the legacy environment files:
 
 [Install MiniConda](https://www.anaconda.com/docs/getting-started/miniconda/install) if needed, then:
 
@@ -66,9 +100,7 @@ conda env create -f environment_mac.yml
 conda activate gtsfm-v1
 ```
 
-### Install `gtsfm` as a module
-
-Now, install `gtsfm` as a module:
+Then install `gtsfm` as a module:
 
 ```bash
 pip install -e .

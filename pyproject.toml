@@ -1,3 +1,129 @@
+[project]
+name = "gtsfm"
+version = "0.2.0"
+description = "Georgia Tech Structure-from-Motion (GTSfM) - an end-to-end SfM pipeline based on GTSAM"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.10"
+authors = [
+    {name = "GTSfM Authors"},
+]
+keywords = ["computer-vision", "structure-from-motion", "sfm", "3d-reconstruction"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    # python essentials
+    "python-dotenv",
+    # dask and related
+    "asyncssh",
+    "dask==2025.9.1",
+    "distributed==2025.9.1",
+    "lz4==4.4.4",
+    "msgpack==1.1.1",
+    "graphviz",
+    "toolz==1.1.0",
+    "tornado==6.5.2",
+    # core functionality and APIs
+    "hydra-core",
+    "matplotlib>=3.5",
+    "networkx",
+    "numpy==2.2.6",
+    "open3d",
+    "pandas==2.3.3",
+    "pillow>=9.0.0",
+    "scikit-learn",
+    "scipy",
+    "seaborn",
+    # 3rd party algorithms for different modules
+    "kornia>=0.7.3",
+    "pycolmap==3.11.1",
+    # io
+    "h5py",
+    "plotly>=5.0",
+    "tabulate",
+    "simplejson",
+    "pyparsing>=3.0.9",
+    "psycopg2-binary",
+    # pip dependencies from environment_linux_cpuonly.yml
+    "opencv-python>=4.5.4.60",
+    "pydegensac",
+    "colour",
+    "trimesh[easy]",
+    "gtsam==4.3a0",
+    "pydot",
+    "roma",
+    "tqdm",
+    "einops",
+    "huggingface-hub[torch]==0.34.4",
+    "Flask>=3.0",
+]
+
+[project.optional-dependencies]
+# Development dependencies
+dev = [
+    "black",
+    "coverage",
+    "mypy",
+    "pylint",
+    "pytest",
+    "pytest-cov",
+    "flake8",
+    "isort",
+    "parameterized",
+]
+
+# CPU-only PyTorch (for CI/testing without GPU)
+cpu = [
+    "torch==2.5.1+cpu",
+    "torchvision==0.20.1+cpu",
+]
+
+# GPU PyTorch with CUDA support
+gpu = [
+    "torch==2.5.1",
+    "torchvision==0.20.1",
+    "tensorboard",
+    "pyglet<2",
+    # 3DGS
+    "gsplat==1.5.3",
+    "torchmetrics==1.7.3",
+    "tyro==0.9.24",
+    # AnySplat
+    "dacite",
+    "lightning",
+    "sk-video",
+    "xformers==0.0.29",
+    "e3nn",
+    "colorspacious",
+    "plyfile",
+    "imageio==2.37.0",
+    "imageio-ffmpeg",
+    "jaxtyping",
+]
+
+[project.urls]
+Homepage = "https://github.com/borglab/gtsfm"
+Repository = "https://github.com/borglab/gtsfm"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["gtsfm"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml"]
+
 [tool.black]
 line-length = 120
 target-version = ['py38', 'py39', 'py310', 'py311']
@@ -11,3 +137,21 @@ generated-members = ["numpy.*", "torch.*", "cv2.*", "cv.*", "scipy.*", "gtsam.*"
 [tool.flake8]
 max-line-length = 120
 ignore = ["E201", "E202", "E203", "E231", "W291", "W293", "E303", "W391", "E402", "W503"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.uv]
+index-url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu", marker = "extra == 'cpu'" }
+torchvision = { index = "pytorch-cpu", marker = "extra == 'cpu'" }
