@@ -1,19 +1,16 @@
 #!/bin/bash
 
 ##########################################################
-# GTSFM dependencies (including GTSAM) previously installed using conda
+# GTSFM dependencies previously installed using uv
 ##########################################################
 
 echo "Running .github/scripts/setup.sh..."
-conda init
-conda info --envs
 
 ##########################################################
-# Install GTSFM as a module
+# Git submodules
 ##########################################################
 
 cd $GITHUB_WORKSPACE
-pip install -e .
 git submodule update --init --recursive
 
 ##########################################################
