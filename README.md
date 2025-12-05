@@ -44,7 +44,7 @@ uv sync --extra dev --extra gpu
 
 Check your cuda version then install `torch_scatter` from pre-built wheels. For example, for CUDA 12.1 → use cu121:
 ```bash
-uv pip install torch-scatter -f https://data.pyg.org/whl/torch-2.5.1+cu121.html
+uv pip install torch-scatter -f https://data.pyg.org/whl/torch-2.6.0+cu121.html
 ```
 
 On **Linux**, for CPU-only (no GPU), run:
@@ -82,7 +82,7 @@ Check your cuda version then install `torch_scatter` from pre-built wheels
 
 For example, for CUDA 12.1 → use cu121 
 ```bash
-pip install torch-scatter -f https://data.pyg.org/whl/torch-2.5.1+cu121.html
+pip install torch-scatter -f https://data.pyg.org/whl/torch-2.6.0+cu121.html
 ```
 
 To use PACE, use the same linux installation `environment_linux.yml`

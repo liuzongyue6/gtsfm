@@ -83,14 +83,14 @@ dev = [
 
 # CPU-only PyTorch (for CI/testing without GPU)
 cpu = [
-    "torch==2.5.1+cpu",
-    "torchvision==0.20.1+cpu",
+    "torch==2.6.0+cpu",
+    "torchvision==0.21.0+cpu",
 ]
 
 # GPU PyTorch with CUDA support
 gpu = [
-    "torch==2.5.1",
-    "torchvision==0.20.1",
+    "torch==2.6.0",
+    "torchvision==0.21.0",
     "tensorboard",
     "pyglet<2",
     # 3DGS
@@ -101,7 +101,7 @@ gpu = [
     "dacite",
     "lightning",
     "sk-video",
-    "xformers==0.0.29",
+    "xformers==0.0.29.post3",
     "e3nn",
     "colorspacious",
     "plyfile",
