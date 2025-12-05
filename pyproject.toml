@@ -118,15 +118,15 @@ Repository = "https://github.com/borglab/gtsfm"
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["gtsfm"]
+[tool.setuptools.packages.find]
+include = ["gtsfm*", "thirdparty*", "tests*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.yaml", "*.yml"]
 
 [tool.black]
 line-length = 120
-target-version = ['py38', 'py39', 'py310', 'py311']
+target-version = ['py310', 'py311']
 skip-string-normalization = false
 
 [tool.pylint]
