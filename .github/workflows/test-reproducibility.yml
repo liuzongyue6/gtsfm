@@ -2,6 +2,9 @@ name: Reproducibility tests
 
 on: [pull_request, workflow_dispatch]
 
+permissions:
+  contents: read
+
 jobs:
   run-repro-tests:
     name: Run reproducibility tests for different algorithms

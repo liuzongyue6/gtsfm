@@ -2,6 +2,9 @@ name: GTSFM Wheel Builder CI
 
 on: [workflow_dispatch]
 
+permissions:
+  contents: read
+
 jobs:
   test_and_build:
     name: ${{ matrix.os }}_py${{ matrix.python_version }}

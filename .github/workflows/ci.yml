@@ -7,6 +7,9 @@ on:
       - "gtsfm/visualization/**"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Unit tests and python checks
